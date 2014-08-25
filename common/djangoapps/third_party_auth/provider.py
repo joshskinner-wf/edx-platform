@@ -119,6 +119,7 @@ class GoogleOauth2(BaseProvider):
     SETTINGS = {
         'SOCIAL_AUTH_GOOGLE_OAUTH2_KEY': None,
         'SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET': None,
+        'SOCIAL_AUTH_GOOGLE_OAUTH2_DOMAINS': None,
     }
 
     @classmethod

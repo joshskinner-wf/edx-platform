@@ -134,7 +134,7 @@
         </div>
 
         <p class="instructions">
-          ${_('or create your own {platform_name} account by completing all <strong>required*</strong> fields below.').format(platform_name=platform_name)}
+          ${_('some fields will fill in after you have signed in with your Google account.').format(platform_name=platform_name)}
         </p>
 
         % else:
@@ -162,9 +162,9 @@
         % if has_extauth_info is UNDEFINED:
 
         <ol class="list-input">
-          <li class="field required text" id="field-email">
+          <li class="field text" id="field-email">
             <label for="email">${_('E-mail')}</label>
-            <input class="" id="email" type="email" name="email" value="${email}" placeholder="${_('example: username@domain.com')}" required aria-required="true" />
+            <input class="" id="email" type="email" name="email" value="${email}" readonly placeholder="${_('example: username@workiva.com')}" required aria-required="true" />
           </li>
 
           <li class="field required text" id="field-name">
@@ -182,14 +182,14 @@
 
           <li class="is-disabled field optional password" id="field-password" hidden>
             <label for="password">${_('Password')}</label>
-            <input id="password" type="password" name="password" value="" disabled required aria-required="true" />
+            <input id="password" type="password" name="password" value="" disabled aria-required="true" />
           </li>
 
           % else:
 
-          <li class="field required password" id="field-password">
+          <li class="is-disabled field optional password" id="field-password">
             <label for="password">${_('Password')}</label>
-            <input id="password" type="password" name="password" value="" required aria-required="true" />
+            <input id="password" type="password" name="password" value="" disabled aria-required="true" />
           </li>
 
           % endif
