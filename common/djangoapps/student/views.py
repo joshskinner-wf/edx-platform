@@ -1330,16 +1330,17 @@ def create_account(request, post_override=None):  # pylint: disable-msg=too-many
         js['field'] = 'email'
         return JsonResponse(js, status=400)
 
-    try:
-        email = post_vars['email']
-        domain = email[email.find('@'):].encode('UTF8')
-        domains = settings.SOCIAL_AUTH_GOOGLE_OAUTH2_DOMAINS
-        if( domain not in domains ):
-            raise ValidationError(domain,domains)
-    except ValidationError:
-        js['value'] = _("Valid e-mail domain is required.").format(field=a)
-        js['field'] = 'email'
-        return JsonResponse(js, status=400)
+    if( hasattr( settings, 'SOCIAL_AUTH_GOOGLE_OAUTH2_DOMAINS' )):
+        try:
+            email = post_vars['email']
+            domain = email[email.find('@'):].encode('UTF8')
+            domains = settings.SOCIAL_AUTH_GOOGLE_OAUTH2_DOMAINS
+            if( domain not in domains ):
+                raise ValidationError(domain,domains)
+        except ValidationError:
+            js['value'] = _("Valid e-mail domain is required.").format(field=a)
+            js['field'] = 'email'
+            return JsonResponse(js, status=400)
 
     try:
         validate_slug(post_vars['username'])
